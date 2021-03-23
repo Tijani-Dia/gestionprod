@@ -25,7 +25,7 @@ SECRET_KEY = '!t%tuvrj(bn4jb#n6b)2iec)msmiohuqnzm^&l%lgsdc_&ue27'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['powerful-fortress-69818.herokuapp.com']
 
 
 # Application definition

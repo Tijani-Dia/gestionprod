@@ -1,0 +1,32 @@
+{% load static today %}
+
+{% block head %}
+{% endblock head %}
+
+
+    <body>
+        <header>
+            <h1>TRANSVERSALE S.A</h1>
+            <h3>{% block hero %}{% endblock hero %}</h3>
+            {% today %}
+          </header>
+            
+        
+
+        <main role="main">
+            {% block content %}
+            {% endblock content %}
+        </main>
+
+        <footer></footer>
+
+
+        {# Global javascript #}
+        <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+        
+
+        {% block extra_js %}
+            {# Override this in templates to add extra javascript #}
+        {% endblock %}
+    </body>
+</html>

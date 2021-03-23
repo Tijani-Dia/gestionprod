@@ -1,0 +1,20 @@
+{% extends "home/base.html" %}
+{% load static %}
+		
+{% block head %}
+    {% include "includes/head.html" with title='Accueil' %}
+{% endblock head %}
+
+{% block hero %}
+    ACCUEIL
+{% endblock hero %}
+
+{% block content %} 
+    <section>
+        <a href="{% url 'suiviqualite:index' %}">
+            <h2>Résultats Contrôle Qualité</h2>
+        </a>
+        <a><h2>Résultats Contrôle Production</h2></a>
+        <a><h2>Résultats Contrôle Chargement</h2></a>
+    </section>
+{% endblock content %}

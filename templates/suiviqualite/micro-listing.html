@@ -1,0 +1,106 @@
+{% extends "home/base.html" %}
+{% load static form_tags %}
+
+{% block head %}
+    {% include "includes/head.html" with title='Contrôle Qualité' %}
+{% endblock head %}
+
+{% block hero %}
+    Paramètres Microbiologiques
+{% endblock hero %}
+
+{% block content %}
+  <section>
+    {% for el in latest %}
+    <div class="fixture">
+      <div class="fixture-header">
+        <h2> Prise du {{ el.date|date:"d M Y" }} </h2>
+        <div>
+          <button class="show-micro-fixture-form"> Modifier </button>
+          <button class="show-micro-fixture"> Consulter </button>
+        </div>
+      </div>
+
+      <div class="fixture-table micro-table">
+        <div class="trow">
+          <p>Microorganismes Revivifiables (22°C) :</p>
+          {% if el.is_problematic_micro_22 %}
+            <p class="problematic"> {{ el.microorganismes_22 }}</p> 
+          {% else %} 
+            <p> {{ el.microorganismes_22 }}</p>
+          {% endif %}
+        </div>  
+
+        <div class="trow">
+          <p>Microorganismes Revivifiables (36°C) :</p>
+          {% if el.is_problematic_micro_36 %}
+            <p class="problematic"> {{ el.microorganismes_36 }}</p> 
+          {% else %} 
+            <p> {{ el.microorganismes_36 }}</p>
+          {% endif %}
+        </div>
+
+        <div class="trow">
+          <p>Microorganismes Revivifiables (44°C) :</p>
+          {% if el.is_problematic_micro_44 %}
+            <p class="problematic"> {{ el.microorganismes_44 }}</p> 
+          {% else %} 
+            <p> {{ el.microorganismes_44 }}</p>
+          {% endif %}
+        </div>
+
+        <div class="trow">
+          <p>Coliformes Totaux :</p>
+          {% if el.is_problematic_coliformes_totaux %}
+            <p class="problematic"> {{ el.coliformes_totaux }}</p> 
+          {% else %} 
+            <p> {{ el.coliformes_totaux }}</p>
+          {% endif %}
+        </div>
+
+        <div class="trow">
+          <p>Coliformes fécaux :</p>
+          {% if el.is_problematic_coliformes_fecaux %}
+            <p class="problematic"> {{ el.coliformes_fecaux }}</p> 
+          {% else %} 
+            <p> {{ el.coliformes_fecaux }}</p>
+          {% endif %}
+        </div>
+
+        <div class="trow">
+          <p>E-COLI :</p>
+          {% if el.is_problematic_e_coli %}
+            <p class="problematic"> {{ el.e_coli }}</p> 
+          {% else %} 
+            <p> {{ el.e_coli }}</p>
+          {% endif %}
+        </div>
+
+        <div class="trow">
+          <p>Pseudomonas :</p>
+          {% if el.is_problematic_pseudomonas %}
+            <p class="problematic"> {{ el.pseudomonas }}</p> 
+          {% else %} 
+            <p> {{ el.pseudomonas }}</p>
+          {% endif %} 
+        </div>
+
+        <div class="trow">
+          <p>Observations :</p>
+          <p> {{ el.observation }} </p>  
+        </div>
+
+        <div class="fixture-extra">
+          <button class="modify-fixture">Modifier</button>
+          <span class="hide-fixture"><i class="material-icons">keyboard_arrow_up</i></span>   
+        </div>
+      </div>
+      {% micro_modify_form el %}
+    </div>
+    {% endfor %}
+  </section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/listing/micro.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "home/base.html" %}
+
+{% block head %}
+    {% include "includes/head.html" with title='Connexion' %}
+{% endblock head %}
+
+{% block content %}
+<div class="login-wrapper">
+    <div id="login">
+        <h1>Connexion</h1>
+        {% if message %}
+            <div class="message">{{ message }}</div>
+        {% endif %}
+        <form action="{% url 'home:login' %}" method="post">
+            {% csrf_token %}
+            <select name="user_role">
+                <option value="">--Choisissez votre Rôle--</option>
+                <option value="A">Administrateur</option>
+                <option value="P">Contrôleur Qualité</option>
+                <option value="Q">Contrôleur Production</option>
+                <option value="C">Contrôleur Chargement</option>
+                <option value="M">Mainteneur</option>
+            </select>
+            <input class="" type="password" name="password" placeholder="Password">
+            <input class="login-btn" type="submit" value="Se Connecter">
+        </form>
+    </div>
+</div>
+{% endblock %}

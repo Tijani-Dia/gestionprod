@@ -1,0 +1,42 @@
+<div class="formulaire" id="form-micro">
+  <form action="{% url 'suiviqualite:submit' 'microbiologique' %}" method="post">
+    {% csrf_token %} 
+    {% for label in labels %}
+      <div class="form-field">
+        <label for="{{ label.id }}">
+            <span>{{ label.label }} :</span>         
+        </label>
+        <div class="form-input">
+          {% if label.required %}
+            <input type="number" name="{{ label.name }}" id="{{ label.id }}" step="0.01" min="0" max="100" required>
+          {% else %}
+            <input type="number" name="{{ label.name }}" id="{{ label.id }}" step="0.01" min="0" max="100">
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+
+    <div class="form-field form-field-select">
+      <label for="psma">
+          <span>Pseudomonas :</span>           
+      </label>
+      <select name="pseudomonas" id="psma" required>
+        <option value="">--Choisissez une option--</option>
+        <option value="A">Absent</option>
+        <option value="P">Présent</option>
+      </select> 
+    </div>
+
+    <div class="observation">
+      <label for="obs-micro">
+          <span>Observations :</span> 
+      </label>
+      <textarea name="observation" id="obs-micro" rows="4"></textarea>
+    </div>
+
+    <div class="submit">      
+      <input type="submit" value="Soumettre"> 
+      <span class="annuler annuler-micro"><a>Annuler</a></span>
+    </div>    
+  </form>
+</div>

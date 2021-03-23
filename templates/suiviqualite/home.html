@@ -1,0 +1,60 @@
+{% extends "home/base.html" %}
+{% load static form_tags %}
+
+{% block head %}
+    {% include "includes/head.html" with title='Contrôle Qualité' %}
+{% endblock head %}
+
+{% block hero %}
+    Contrôle Qualité
+{% endblock hero %}
+
+{% block content %}
+  <section>
+    <div class="composante">
+      <div class="entete">
+        <h2>Paramètres physico-chimiques</h2>
+        <div>
+          <button id="show-pc-form"> Remplir </button>
+          <a href="{% url 'suiviqualite:consult' 'physicochimique' %}">
+            <button> Consulter </button>
+          </a>
+        </div>
+      </div>
+      {% pc_form %}
+    </div>
+
+
+    <div class="composante">
+        <div class="entete">
+          <h2>Paramètres microbiologiques</h2>
+          <div>
+            <button id="show-micro-form"> Remplir </button>
+            <a href="{% url 'suiviqualite:consult' 'microbiologique' %}">
+                <button> Consulter </button>
+            </a>
+          </div>
+        </div>
+
+        {% micro_form %}
+    </div>
+
+    <div class="composante">
+      <div class="entete">
+        <h2>Paramètres metrologiques</h2>
+        <div>
+          <button id="show-metro-form"> Remplir </button>
+          <a href="{% url 'suiviqualite:consult' 'metrologique' %}">
+            <button> Consulter </button>
+          </a>
+        </div>
+      </div>
+
+      {% metro_form %} 
+    </div>
+  </section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/forms.js' %}"></script>
+{% endblock %}

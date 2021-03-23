@@ -1,0 +1,33 @@
+<div class="formulaire" id="form-pc">
+    <form action="{% url 'suiviqualite:submit' 'physicochimique' %}" method="POST">
+        {% csrf_token %}
+        {% for label in labels %}
+        <div class="form-field">
+            <label for="{{ label.id }}">
+                <span>{{ label.label }} :</span>         
+            </label>
+            <div class="form-input">
+                {% if label.required %}
+                    <input type="number" name="{{ label.name }}" id="{{ label.id }}" step="0.01" min="0" max="100" value="{{ label.value }}" required>
+                {% else %}
+                    <input type="number" name="{{ label.name }}" id="{{ label.id }}" step="0.01" min="0" max="100" value="{{ label.value }}">
+                {% endif %}
+                <span class="unite"> {{ label.unite }} </span> 
+            </div>
+        </div>
+        {% endfor %}
+  
+        <div class="observation">
+            <label for="obs-pc">
+                <span>Observations :</span> 
+            </label>
+            <textarea name="observation" id="obs-pc" rows="4" value="{{ obs }}">{{ obs }}</textarea>
+        </div>
+    
+        <div class="submit">
+            <input type="hidden" name="element_id" value="{{ element_id }}">     
+            <input type="submit" value="Enregistrer"> 
+            <span class="annuler annuler-pc"><a>Annuler</a></span>
+        </div>
+    </form>
+</div>

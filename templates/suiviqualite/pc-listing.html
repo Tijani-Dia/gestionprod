@@ -1,0 +1,98 @@
+{% extends "home/base.html" %}
+{% load static form_tags %}
+
+{% block head %}
+    {% include "includes/head.html" with title='Contrôle Qualité' %}
+{% endblock head %}
+
+{% block hero %}
+    Paramètres Physico-Chimiques
+{% endblock hero %}
+
+{% block content %}
+  <section>
+    {% for el in latest %}
+    <div class="fixture">
+      <div class="fixture-header">
+        <h2> Prise du {{ el.date|date:"d M Y" }} </h2>
+        <div>
+          <button class="show-pc-fixture-form"> Modifier </button>
+          <button class="show-pc-fixture"> Consulter </button>
+        </div>
+      </div>
+
+      <div class="fixture-table pc-table">
+        <div class="trow">
+          <p>Chlore libre : </p>
+          {% if el.is_problematic_chlore_libre %}
+            <p class="problematic"> {{ el.chlore_libre }} mg/l</p> 
+          {% else %} 
+            <p> {{ el.chlore_libre }} mg/l</p>
+          {% endif %}
+        </div>
+
+        <div class="trow">
+          <p>Chlore total : </p>
+          {% if el.is_problematic_chlore_total %}
+            <p class="problematic"> {{ el.chlore_total }} mg/l</p> 
+          {% else %} 
+            <p> {{ el.chlore_total }} mg/l</p>
+          {% endif %}
+        </div>
+        
+        <div class="trow">
+          <p>Turbidité : </p>
+          {% if el.is_problematic_turbidite %}
+            <p class="problematic"> {{ el.turbidite }} NTU</p> 
+          {% else %} 
+            <p> {{ el.turbidite }} NTU</p>
+          {% endif %}
+        </div>  
+        
+        <div class="trow">
+          <p>PH : </p>
+          {% if el.is_problematic_ph %}
+            <p class="problematic"> {{ el.ph }}</p> 
+          {% else %} 
+            <p> {{ el.ph }}</p>
+          {% endif %}       
+        </div>
+
+        <div class="trow">
+          <p>Dureté : </p>
+          {% if el.is_problematic_durete %}
+            <p class="problematic"> {{ el.durete }}</p> 
+          {% else %} 
+            <p> {{ el.durete }}</p>
+          {% endif %} 
+        </div>
+            
+        <div class="trow">
+          <p>Nitrate : </p>
+          {% if el.is_problematic_nitrate %}
+            <p class="problematic"> {{ el.nitrate }} mg/l</p> 
+          {% else %} 
+            <p> {{ el.nitrate }} mg/l</p>
+          {% endif %}
+        </div>
+
+        <div class="trow">
+          <p>Observations :</p>
+          <p> {{ el.observation }} </p>  
+        </div>
+
+        <div class="fixture-extra">
+          <button class="modify-fixture">Modifier</button>
+          <span class="hide-fixture"><i class="material-icons">keyboard_arrow_up</i></span>   
+        </div>
+      </div>  
+      
+      {% pc_modify_form el %}
+    </div>
+    {% endfor %}
+  </section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/listing/pc.js' %}"></script>
+{% endblock %}

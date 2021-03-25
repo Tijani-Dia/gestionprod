@@ -25,7 +25,7 @@ SECRET_KEY = '!t%tuvrj(bn4jb#n6b)2iec)msmiohuqnzm^&l%lgsdc_&ue27'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['powerful-fortress-69818.herokuapp.com']
+ALLOWED_HOSTS = ['powerful-fortress-69818.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
@@ -33,6 +33,8 @@ ALLOWED_HOSTS = ['powerful-fortress-69818.herokuapp.com']
 INSTALLED_APPS = [
     'home',
     'suiviqualite',
+    'suiviproduction',
+    'suivichargement',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -133,8 +135,11 @@ STATICFILES_DIRS = [
 
 
 # Heroku: Update database configuration from $DATABASE_URL.
+"""
 import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
+"""
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'

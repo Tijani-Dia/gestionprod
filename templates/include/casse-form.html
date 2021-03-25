@@ -1,0 +1,40 @@
+<div class="formulaire" id="form-casse">
+  
+  <div class="casse-field">
+    {% for label in labels %}
+    
+      <div class="casse-title">
+        <h4> {{ label.label }}</h4>
+      </div>
+    
+      <div class="casse-body">
+        {% if element_id %}
+          <span class="casse-count">{{ label.value }}</span>
+          <button class="show-casse"> Mettre à jour</button>
+        {% else %}
+          <button class="show-casse"> Remplir</button>
+        {% endif %}
+      </div>
+      
+      <div class="casse-form">
+        <form action="{% url 'suiviproduction:submit' label.name %}" method="post">
+          {% csrf_token %} 
+          <div class="form-field">
+            <label for="{{ label.id }}">
+              <span> Nombre de sacs à ajouter:</span>         
+            </label>
+            <input type="number" name="{{ label.name }}" id="{{ label.id }}" step="1" min="0" max="10000" required>
+          </div>
+          <div class="submit"> 
+            {% if element_id %}
+              <input type="hidden" name="element_id" value="{{ element_id }}"> 
+            {% endif %}    
+            <input type="submit" value="Enregistrer"> 
+            <span class="annuler annuler-casse"><a>Annuler</a></span>
+          </div>  
+        </form>
+      </div>
+    {% endfor %}
+
+  </div>
+</div>

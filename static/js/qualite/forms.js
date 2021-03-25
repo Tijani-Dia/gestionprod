@@ -2,10 +2,12 @@ document.addEventListener("DOMContentLoaded", () => {
     let pcFormBtn = document.querySelector("#show-pc-form")
     let microFormBtn = document.querySelector("#show-micro-form")
     let metroFormBtn = document.querySelector("#show-metro-form")
+    let prodFormBtn = document.querySelector("#show-prod-form")
 
     pcFormBtn.addEventListener('click', togglePcForm)
     microFormBtn.addEventListener('click', toggleMicroForm)
     metroFormBtn.addEventListener('click', toggleMetroForm)
+    prodFormBtn.addEventListener('click', toggleProdForm)
 })
 
 function togglePcForm(event) {
@@ -44,5 +46,18 @@ function toggleMicroForm(event) {
         microAnnulerBtn.addEventListener('click', toggleMicroForm)
     } else {
         microForm.style.display = 'none'
+    }
+}
+
+function toggleProdForm(event) {
+    let prodForm = document.querySelector("#form-prod")
+    
+    if (prodForm.style.display == 'none' || prodForm.style.display == '') {
+        prodForm.style.display = 'block'
+
+        let prodAnnulerBtn = document.querySelector(".annuler-prod")
+        prodAnnulerBtn.addEventListener('click', toggleprodForm)
+    } else {
+        prodForm.style.display = 'none'
     }
 }

@@ -12,9 +12,16 @@
 {% block content %} 
     <section>
         <a href="{% url 'suiviqualite:index' %}">
-            <h2>Résultats Contrôle Qualité</h2>
+            <img src="{% static 'icons/data.svg' %}" style="height: 40px; margin-right: 1rem;">
+            <h2>Contrôle Qualité</h2>
         </a>
-        <a><h2>Résultats Contrôle Production</h2></a>
-        <a><h2>Résultats Contrôle Chargement</h2></a>
+        <a href="{% url 'suiviproduction:index' %}">
+            <img src="{% static 'icons/production.svg' %}" style="height: 40px; margin-right: 1rem;">
+            <h2>Contrôle Production</h2>
+        </a>
+        <a href="{% url 'suivichargement:index' %}">
+            <img src="{% static 'icons/chargement.svg' %}" style="height: 40px; margin-right: 1rem;">
+            <h2>Contrôle Chargement</h2>
+        </a>
     </section>
 {% endblock content %}

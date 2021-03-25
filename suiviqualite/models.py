@@ -1,9 +1,8 @@
 from django.db import models
-from django.conf import settings
 
 import datetime
 
-from home.models import User
+from home.models import Formulaire
 
 class MachineEnsacheuse(models.Model):
     """
@@ -15,16 +14,6 @@ class MachineEnsacheuse(models.Model):
         return self.machine_code
 
 
-class Formulaire(models.Model):
-    """ 
-    Parent class from which all formModels will
-    inherit from. 
-    """
-    controleur = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)
-    observation = models.TextField(blank=True)
-
-
 
 class ParametresPhysicoChimiques(Formulaire):
     chlore_libre = models.FloatField("Chlore Libre")
@@ -33,6 +22,12 @@ class ParametresPhysicoChimiques(Formulaire):
     ph = models.FloatField("PH")
     durete = models.IntegerField("Dureté")
     nitrate = models.FloatField("Nitrate", null=True, blank=True)
+    formulaire_ptr = models.OneToOneField(
+        Formulaire, on_delete=models.CASCADE,
+        parent_link=True,
+        primary_key=True,
+        auto_created=True,
+    )
 
     def is_problematic_chlore_libre(self):
         return self.chlore_libre > 1
@@ -64,8 +59,14 @@ class ParametresMicrobiologiques(Formulaire):
         ('A', 'Absence'),
         ('P', 'Présence'),
     ]
-
     pseudomonas = models.CharField("pseudomonas", default="A", choices=A_P_CHOICES, max_length=1)
+
+    formulaire_ptr = models.OneToOneField(
+        Formulaire, on_delete=models.CASCADE,
+        parent_link=True,
+        primary_key=True,
+        auto_created=True,
+    )
 
 
     def is_problematic_micro_22(self):
@@ -99,6 +100,13 @@ class ParametresMetrologiques(Formulaire):
         ('Q3', '3e Quart'),
     ]
     quart = models.CharField("Quart de Production", choices=QUART_CHOICES, max_length=2)
+    formulaire_ptr = models.OneToOneField(
+        Formulaire, on_delete=models.CASCADE,
+        parent_link=True,
+        primary_key=True,
+        auto_created=True,
+    )
+
 
 
     def is_problematic_poids(self):

@@ -78,7 +78,7 @@ def submit(request, parametre):
         ### PARAMETRES PHYSICO-CHIMIQUES ####
         if parametre == "physicochimique":
             if request.method == "POST":
-
+                
                 chlore_libre = float(request.POST["chlore_libre"])
                 chlore_total = float(request.POST["chlore_total"])
                 turbidite = float(request.POST["turbidite"])
@@ -111,6 +111,7 @@ def submit(request, parametre):
                         return render(request, "notification.html", context)
 
                 else:
+                    
                     new = ParametresPhysicoChimiques(
                         controleur = controleur,
                         chlore_libre = chlore_libre,
@@ -124,14 +125,15 @@ def submit(request, parametre):
 
                     try:
                         new.save()
-                    except :
-                        context["error"] = """Une erreur s'est produite lors de
-                            la validation du formulaire.
-                            Veuillez réessayer SVP."""
+                        
+                    except Exception as e :
+                        context["error"] = "{}".format(e)
 
+                        
                         return render(request, "notification.html", context)
 
-                context["success"] = "Les données ont bien été enregistrées."               
+                context["success"] = "Les données ont bien été enregistrées." 
+                              
                 return render(request, "notification.html", context)
 
 

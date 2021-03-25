@@ -12,6 +12,10 @@ def index(request):
 
     if user.user_role == 'Q':
         return HttpResponseRedirect(reverse("suiviqualite:index"))
+
+    elif user.user_role == 'P':
+        return HttpResponseRedirect(reverse("suiviproduction:index"))
+  
     else :
         return render(request, 'home/home.html')
 

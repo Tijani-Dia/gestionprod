@@ -1,0 +1,51 @@
+{% extends "home/base.html" %}
+{% load static form_tags_prod %}
+
+{% block head %}
+    {% include "includes/head.html" with title='Contrôle Production' %}
+{% endblock head %}
+
+{% block hero %}
+    Contrôle Production
+{% endblock hero %}
+
+{% block content %}
+  <section>
+    <div class="composante">
+      <div class="entete">
+        <div class="entete-title">
+          <img src="{% static 'icons/production.svg' %}" style="height: 40px; margin-right: 1rem;">
+          <h2>Production</h2>
+        </div>      
+        <div>
+          <button id="show-prod-form"> Remplir </button>
+          <a href="{% url 'suiviproduction:consult' 'production' %}">
+            <button> Consulter </button>
+          </a>
+        </div>
+      </div>
+      {% include "includes/prod-form.html" %}
+    </div>
+
+
+    <div class="composante">
+      <div class="entete">
+        <div class="entete-title">
+          <img src="{% static 'icons/casse.svg' %}" style="height: 40px; margin-right: 1rem;">
+          <h2>Casse</h2>
+        </div>
+        <div>
+          <a href="{% url 'suiviproduction:consult' 'casse' %}">
+              <button> Consulter </button>
+          </a>
+        </div>
+      </div>
+      {% casse_form %}
+    </div>
+
+  </section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/prod/forms.js' %}"></script>
+{% endblock %}

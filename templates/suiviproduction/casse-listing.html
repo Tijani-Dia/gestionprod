@@ -1,0 +1,73 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+{% block head %}
+    {% include "includes/head.html" with title='Contrôle Production' %}
+{% endblock head %}
+
+{% block hero %}
+    CASSES
+{% endblock hero %}
+
+{% block content %}
+  <section>
+    {% for el in latest %}
+    <div class="fixture">
+      <div class="fixture-header">
+        <div class="fixture-header-icon">
+          <img src="{% static 'icons/note.svg' %}" style="height: 40px; margin-right: 1rem;">
+          <h2> Prise du {{ el.date|date:"d M Y" }} </h2>
+        </div>      
+        <div>
+          <button class="show-casse-fixture"> Consulter </button>
+        </div>
+      </div>
+
+      <div class="fixture-table casse-table">
+        <div class="casse-table-header">
+          <p>Casses reçues </p> 
+          <p> {{ el.casses_recues }} </p>
+        </div>
+
+        <div class="casse-table-header">
+          <p>Casses traitées</p> 
+          <p> {{ el.casses_traitees }} </p>
+        </div>
+
+        <div class="casse-table-header">
+          <p>Casses perdues</p> 
+          <p> {{ el.casses_perdues }} </p>
+        </div>
+
+        <div class="trow">
+          <p>Dotations commerciaux</p> 
+          <p> {{ el.dotation_commerciaux }} </p>
+        </div>
+
+        <div class="trow">
+          <p>Dotations personnel</p> 
+          <p> {{ el.dotation_personnel }} </p>
+        </div>
+
+        <div class="trow">
+          <p>Retour commerciaux</p> 
+          <p> {{ el.retour_commerciaux }} </p>
+        </div>
+
+        <div class="trow">
+          <p>Casse réelle</p> 
+          <p> {{ el.casse_reelle}} </p>
+        </div>
+
+        <div class="fixture-extra">
+          <span class="hide-fixture"><i class="material-icons">keyboard_arrow_up</i></span>   
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/listing/casse.js' %}"></script>
+{% endblock %}

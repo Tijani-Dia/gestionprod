@@ -1,0 +1,71 @@
+{% extends "home/base.html" %}
+{% load static form_tags_charg %}
+
+{% block head %}
+    {% include "includes/head.html" with title='Contrôle Chargement' %}
+{% endblock head %}
+
+{% block hero %}
+    Chargement
+{% endblock hero %}
+
+{% block content %}
+  <section>
+    {% for el in latest %}
+    <div class="fixture">
+      <div class="fixture-header">
+        <div class="fixture-header-icon">
+          <img src="{% static 'icons/note.svg' %}" style="height: 40px; margin-right: 1rem;">
+          <h2> Prise du {{ el.date|date:"d M Y" }} </h2>
+        </div>
+        <div>
+          <button class="show-charg-fixture-form"> Modifier </button>
+          <button class="show-charg-fixture"> Consulter </button>
+        </div>
+      </div>
+
+      <div class="fixture-table charg-table">
+        <div class="trow">
+          <p>Numéro du véhicule : </p>
+          <p> {{ el.vehicule }} </p>
+        </div>
+
+        <div class="trow">
+          <p>Numéro du bon de livraison : </p>
+          <p> {{ el.bon_de_livraison }} </p>
+        </div>
+
+        <div class="trow">
+          <p>Numéro de sacs à la sortie du véhicule : </p>
+          <p> {{ el.sacs_sortis }} </p>
+        </div>
+
+        <div class="trow">
+          <p>Inclut un bonus : </p>
+          {% if el.bonus %}
+            <p> Oui </p>
+          {% else %}
+            <p> Non </p>
+          {% endif %}
+        </div>
+        
+        <div class="trow">
+          <p>Observations :</p>
+          <p> {{ el.observation }} </p>  
+        </div>
+
+        <div class="fixture-extra">
+          <button class="modify-fixture">Modifier</button>
+          <span class="hide-fixture"><i class="material-icons">keyboard_arrow_up</i></span>   
+        </div>
+      </div>  
+      
+      {% charg_modify_form el %}
+    </div>
+    {% endfor %}
+  </section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/listing/charg.js' %}"></script>
+{% endblock %}

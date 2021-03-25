@@ -1,0 +1,114 @@
+{% extends "home/base.html" %}
+{% load static form_tags_prod %}
+
+{% block head %}
+    {% include "includes/head.html" with title='Contrôle Qualité' %}
+{% endblock head %}
+
+{% block hero %}
+    Production
+{% endblock hero %}
+
+{% block content %}
+  <section>
+    {% for date, queryset in latest.items %}
+      <div class="prise">
+        <div class="prise-header">
+          <div class="fixture-header-icon">
+            <img src="{% static 'icons/note.svg' %}" style="height: 40px; margin-right: 1rem;">
+            <h2> Prise du {{ date }} </h2>
+          </div>    
+          <div class="show-prise"><i class="material-icons">keyboard_arrow_down</i></div>
+        </div>
+
+        <div class="prise-body">
+          <div class="quart">
+            <div class="quart-header">  
+              <h4>1er Quart</h4>       
+              <div class="show-quart"><i class="material-icons">keyboard_arrow_down</i></div>
+            </div>
+            
+            <div class="quart-container">
+              {% if queryset.quart_un %}  
+                <div class="quart-head quart-head-casse">
+                  <p>Nombre de sacs produits</p>
+                  <p>Action</p>
+                </div>
+            
+                {% for result in queryset.quart_un %}
+                  <div class="quart-data quart-data-casse">                     
+                    <p>{{ result.sacs_produits }}</p>                   
+                    <button class="modify-result">Modifier</button>                  
+                  </div>
+                  {% prod_modify_form result %}
+                {% endfor %}
+              {% else %}
+                <p>Pas de données rentrées</p>
+              {% endif %}
+              <div class="hide-quart"><i class="material-icons">keyboard_arrow_up</i></div>
+            </div>
+          </div>
+
+          <div class="quart">
+            <div class="quart-header"> 
+              <h4>2nd Quart</h4>        
+              <div class="show-quart"><i class="material-icons">keyboard_arrow_down</i></div>
+            </div> 
+            <div class="quart-container">       
+              {% if queryset.quart_deux %}                    
+              
+                <div class="quart-head quart-head-casse">
+                  <p>Nombre de sacs produits</p>
+                  <p>Action</p>
+                </div>
+            
+                {% for result in queryset.quart_deux %}
+                  <div class="quart-data quart-data-casse">                     
+                    <p>{{ result.sacs_produits }}</p>  
+                    <button class="modify-result">Modifier</button>                  
+                  </div>
+                  {% prod_modify_form result %}
+                {% endfor %}
+              {% else %}
+                <p>Pas de données rentrées</p>
+              {% endif %}
+              <div class="hide-quart"><i class="material-icons">keyboard_arrow_up</i></div>
+            </div>           
+          </div>
+
+          <div class="quart">
+            <div class="quart-header"> 
+              <h4>3e Quart</h4>        
+              <div class="show-quart"><i class="material-icons">keyboard_arrow_down</i></div>
+            </div>
+            <div class="quart-container">
+              {% if queryset.quart_trois %}              
+                <div class="quart-head quart-head-casse">
+                  <p>Nombre de sacs produits</p>
+                  <p>Action</p>
+                </div>
+            
+                {% for result in queryset.quart_trois %}
+                  <div class="quart-data quart-data-casse">                     
+                    <p>{{ result.sacs_produits }}</p>  
+                    <button class="modify-result">Modifier</button>                  
+                  </div>
+                  {% prod_modify_form result %}
+                {% endfor %}
+              {% else %}
+                <p>Pas de données rentrées</p>
+              {% endif %}
+              <div class="hide-quart"><i class="material-icons">keyboard_arrow_up</i></div>
+            </div>             
+          </div>
+
+          <span class="hide-prise"><i class="material-icons">keyboard_arrow_up</i></span>
+        </div>
+      </div>
+    {% endfor %}
+  </section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/listing/prod.js' %}"></script>
+{% endblock %}

@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+from django.conf import settings
+
 class User(AbstractUser):
     """
     User Model 
@@ -20,3 +22,12 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+class Formulaire(models.Model):
+    """ 
+    Parent class from which all formModels will
+    inherit from. 
+    """
+    controleur = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now_add=True)
+    observation = models.TextField(blank=True)

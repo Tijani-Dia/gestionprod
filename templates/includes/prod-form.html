@@ -1,0 +1,39 @@
+<div class="formulaire" id="form-prod">
+    <form action="{% url 'suiviproduction:submit' 'production' %}" method="post">
+        {% csrf_token %} 
+        <div class="select-group">
+          <select name="quart" required>
+            <option value="">--Quart--</option>
+            <option value="Q1">1er Quart</option>
+            <option value="Q2">2e Quart</option>
+            <option value="Q3">3e Quart</option>
+          </select> 
+        </div>
+  
+      <div class="form-field">
+        <label for="tickets">
+            <span>Nombre de tickets reçus :</span>         
+        </label>
+        <input type="number" name="tickets" id="tickets" step="1" min="0" max="10000" required>
+      </div>
+
+      <div class="form-field">
+        <label for="sacs">
+            <span>Nombre de sacs supplémentaires:</span>         
+        </label>
+        <input type="number" name="sacs" id="sacs" step="1" min="0" max="10000">
+      </div>
+  
+      <div class="observation">
+        <label for="obs-prod">
+            <span>Observations :</span> 
+        </label>
+        <textarea name="observation" id="obs-prod" rows="4"></textarea>
+      </div>
+  
+      <div class="submit">      
+        <input type="submit" value="Soumettre"> 
+        <span class="annuler annuler-prod"><a>Annuler</a></span>
+      </div>    
+    </form>
+  </div>

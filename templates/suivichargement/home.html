@@ -1,0 +1,35 @@
+{% extends "home/base.html" %}
+{% load static form_tags_prod %}
+
+{% block head %}
+    {% include "includes/head.html" with title='Contrôle chargement' %}
+{% endblock head %}
+
+{% block hero %}
+    Contrôle Chargement
+{% endblock hero %}
+
+{% block content %}
+  <section>
+    <div class="composante">
+      <div class="entete">
+        <div class="entete-title">
+          <img src="{% static 'icons/chargement.svg' %}" style="height: 40px; margin-right: 1rem;">
+          <h2>Contrôle Chargement</h2>
+        </div>
+        <div>
+          <button id="show-charg-form"> Remplir </button>
+          <a href="{% url 'suivichargement:consult' 'chargement' %}">
+            <button> Consulter </button>
+          </a>
+        </div>
+      </div>
+      {% include "includes/charg-form.html" %}
+    </div>
+
+  </section>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{% static 'js/charg/forms.js' %}"></script>
+{% endblock %}

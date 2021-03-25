@@ -1,0 +1,48 @@
+<div class="formulaire" id="form-charg">
+    <form action="{% url 'suivichargement:submit' 'chargement' %}" method="post">
+      {% csrf_token %} 
+  
+      <div class="form-field">
+        <label for="vehicule">
+          <span>Numéro du véhicule :</span>         
+        </label>
+        <input type="text" name="vehicule" id="vehicule" required>
+      </div>
+
+      <div class="form-field">
+        <label for="bon">
+          <span>Numéro du bon de livraison:</span>         
+        </label>
+        <input type="text" name="bon_de_livraison" id="bon" required>
+      </div>
+
+      <div class="form-field">
+        <label for="sacs">
+          <span>Nombre de sacs à la fin du chargement:</span>         
+        </label>
+        <input type="text" name="sacs_sortis" id="sacs" required>
+      </div>
+
+      <div class="select-group">
+        <label for="bonus">
+          <span>Ce chargement inclut-il un bonus?</span>         
+        </label>
+        <select name="bonus" id="bonus">
+          <option value="True">Oui</option>
+          <option value="False">Non</option>
+        </select> 
+      </div>
+  
+      <div class="observation">
+        <label for="obs-charg">
+          <span>Observations :</span> 
+        </label>
+        <textarea name="observation" id="obs-prod" rows="4"></textarea>
+      </div>
+  
+      <div class="submit">      
+        <input type="submit" value="Soumettre"> 
+        <span class="annuler annuler-charg"><a>Annuler</a></span>
+      </div>    
+    </form>
+  </div>

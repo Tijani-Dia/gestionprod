@@ -1,5 +1,5 @@
 {% extends "home/base.html" %}
-{% load static form_tags %}
+{% load static form_tags_qa %}
 
 {% block head %}
     {% include "includes/head.html" with title='Contrôle Qualité' %}
@@ -13,7 +13,11 @@
   <section>
     <div class="composante">
       <div class="entete">
-        <h2>Paramètres physico-chimiques</h2>
+        <div class="entete-title">
+          <img src="{% static 'icons/laboratory.svg' %}" style="height: 40px; margin-right: 1rem;">
+          <h2>Paramètres physico-chimiques</h2>
+        </div>
+        
         <div>
           <button id="show-pc-form"> Remplir </button>
           <a href="{% url 'suiviqualite:consult' 'physicochimique' %}">
@@ -27,7 +31,10 @@
 
     <div class="composante">
         <div class="entete">
-          <h2>Paramètres microbiologiques</h2>
+          <div class="entete-title">
+            <img src="{% static 'icons/microscope.svg' %}" style="height: 40px; margin-right: 1rem;">
+            <h2>Paramètres microbiologiques</h2>
+          </div>
           <div>
             <button id="show-micro-form"> Remplir </button>
             <a href="{% url 'suiviqualite:consult' 'microbiologique' %}">
@@ -41,7 +48,10 @@
 
     <div class="composante">
       <div class="entete">
-        <h2>Paramètres metrologiques</h2>
+        <div class="entete-title">
+          <img src="{% static 'icons/weight.svg' %}" style="height: 40px; margin-right: 1rem;">
+          <h2>Paramètres metrologiques</h2>
+        </div>
         <div>
           <button id="show-metro-form"> Remplir </button>
           <a href="{% url 'suiviqualite:consult' 'metrologique' %}">
@@ -56,5 +66,5 @@
 {% endblock %}
 
 {% block extra_js %}
-  <script src="{% static 'js/forms.js' %}"></script>
+  <script src="{% static 'js/qualite/forms.js' %}"></script>
 {% endblock %}

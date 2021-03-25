@@ -1,5 +1,5 @@
 {% extends "home/base.html" %}
-{% load static form_tags %}
+{% load static form_tags_qa %}
 
 {% block head %}
     {% include "includes/head.html" with title='Contrôle Qualité' %}
@@ -14,7 +14,10 @@
     {% for date, queryset in latest.items %}
       <div class="prise">
         <div class="prise-header">
-          <h2> Prise du {{ date }} </h2>
+          <div class="fixture-header-icon">
+            <img src="{% static 'icons/note.svg' %}" style="height: 40px; margin-right: 1rem;">
+            <h2> Prise du {{ date }} </h2>
+          </div>
           <div class="show-prise"><i class="material-icons">keyboard_arrow_down</i></div>
         </div>
 

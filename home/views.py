@@ -15,6 +15,9 @@ def index(request):
 
     elif user.user_role == 'P':
         return HttpResponseRedirect(reverse("suiviproduction:index"))
+
+    elif user.user_role == 'C':
+        return HttpResponseRedirect(reverse("suivichargement:index"))
   
     else :
         return render(request, 'home/home.html')

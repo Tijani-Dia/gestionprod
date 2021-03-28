@@ -1,5 +1,7 @@
 from django.db import models
 
+import datetime
+
 from home.models import Formulaire
 
 
@@ -15,3 +17,13 @@ class FormulaireChargement(Formulaire):
         primary_key=True,
         auto_created=True,
     )
+
+
+def get_latest_by_date():
+    base = datetime.date.today()
+    result = {}
+    date_list = [base - datetime.timedelta(days=x) for x in range(7)]
+    for date in date_list:
+        result['{}'.format(date)] = FormulaireChargement.objects.filter(date__date=date)
+
+    return result

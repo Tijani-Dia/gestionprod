@@ -23,6 +23,21 @@ h1 {
 	margin-bottom: 1rem;
 }
 
+#success {
+    background-color: #add5da;
+    color: #e8f1f2;
+}
+
+#error {
+    background-color: #d7707a;
+    color: #dad4d2;
+}
+
+#success > p,
+#error > p {
+	padding: 0.5rem;
+}
+
 header {
 	padding: 1rem;
 	position: relative;

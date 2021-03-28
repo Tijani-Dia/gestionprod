@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+from django.http import JsonResponse
 
 from .models import (
     ParametresPhysicoChimiques,
@@ -240,13 +241,19 @@ def submit(request, parametre):
                     try:
                         new.save()
                     except :
-                        context["error"] = """Une erreur s'est produite lors de
+                        error = """Une erreur s'est produite lors de
                             la validation du formulaire.
                             Veuillez réessayer SVP."""
 
-                        return render(request, "notification.html", context)
+                        return JsonResponse(
+                            {'detail': error},
+                            status=400
+                        )
 
-                context["success"] = "Les données ont bien été enregistrées."
-                return render(request, "notification.html", context)
+                success = "Les données ont bien été enregistrées."
+                return JsonResponse(
+                    {'detail': success},
+                    status=201
+                )
 
                         

@@ -2,13 +2,53 @@ document.addEventListener("DOMContentLoaded", () => {
     let pcFormBtn = document.querySelector("#show-pc-form")
     let microFormBtn = document.querySelector("#show-micro-form")
     let metroFormBtn = document.querySelector("#show-metro-form")
-    let prodFormBtn = document.querySelector("#show-prod-form")
+    //let prodFormBtn = document.querySelector("#show-prod-form")
+
+    let metroForm = document.forms["metro"]
+    metroForm.addEventListener('submit', submitForm)
 
     pcFormBtn.addEventListener('click', togglePcForm)
     microFormBtn.addEventListener('click', toggleMicroForm)
     metroFormBtn.addEventListener('click', toggleMetroForm)
-    prodFormBtn.addEventListener('click', toggleProdForm)
+    //prodFormBtn.addEventListener('click', toggleProdForm)
 })
+
+async function submitForm(event) {
+    event.preventDefault()
+    let metroForm = document.forms["metro"]
+    let metroFormData = new FormData(metroForm)
+    
+    let response = await fetch("soumettre/metrologique/", {
+        method: 'POST',
+        body: metroFormData
+    });
+
+    if (response.status == 201) {
+        let result = await response.json()
+
+        displayNotification(result["detail"], 'success')
+
+        metroForm.machine.value = ""
+        metroForm.poids.value = ""
+        metroForm.observation.value = ""
+        window.scrollTo(0, 0)
+    } else {
+        let result = await response.json()
+        displayNotification(result["detail"], 'error')
+    }
+}
+
+function displayNotification(msg, selector) {
+    let notifDiv = document.querySelector(`#${selector}`)
+    let notifMsg = document.createElement("p")
+    notifMsg.innerHTML = msg
+    notifDiv.appendChild(notifMsg)
+
+    setTimeout(() => {
+        notifMsg.remove()
+    }, 3000)
+}
+
 
 function togglePcForm(event) {
     let pcForm = document.querySelector("#form-pc")

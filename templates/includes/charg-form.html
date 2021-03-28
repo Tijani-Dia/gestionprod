@@ -1,5 +1,5 @@
 <div class="formulaire" id="form-charg">
-    <form action="{% url 'suivichargement:submit' 'chargement' %}" method="post">
+    <form name="chargement">
       {% csrf_token %} 
   
       <div class="form-field">

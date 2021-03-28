@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 
-
-from .models import FormulaireChargement
+from .models import FormulaireChargement, get_latest_by_date
 
 # Create your views here.
 ALLOWED_USERS = ['C', 'A', 'M']
@@ -21,7 +21,6 @@ def index(request):
 @login_required(login_url='/login/')
 def consult(request, parametre):
     if request.user.user_role in ALLOWED_USERS:
-
         if parametre == "chargement":
             latest = FormulaireChargement.objects.all().order_by('-date')
             if len(latest) > 10:
@@ -93,7 +92,13 @@ def submit(request, parametre):
                         la validation du formulaire.
                         Veuillez réessayer SVP."""
 
-                    return render(request, "notification.html", context)
+                    return JsonResponse(
+                            {'detail': error},
+                            status=400
+                        )
 
-            context["success"] = "Les données ont bien été enregistrées."                           
-            return render(request, "notification.html", context)
+                success = "Les données ont bien été enregistrées."
+                return JsonResponse(
+                    {'detail': success},
+                    status=201
+                )

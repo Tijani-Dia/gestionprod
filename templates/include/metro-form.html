@@ -1,5 +1,5 @@
 <div class="formulaire" id="form-metro">
-  <form action="{% url 'suiviqualite:submit' 'metrologique' %}" method="post">
+  <form name="metro" action="{% url 'suiviqualite:submit' 'metrologique' %}" method="post">
       {% csrf_token %} 
       <div class="select-group">
         <select name="quart" required>
